@@ -1,4 +1,4 @@
-# openvino-AI-project
+# intel-AI-project
 Gihub got openvino AI project(Human chasing mobility)
 
 
