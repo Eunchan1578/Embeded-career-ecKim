@@ -1,1 +1,1 @@
-# this_AI_project is about tracking person for smart cart & item carrier
+# This_AI_project is about tracking person for smart cart & item carrier
