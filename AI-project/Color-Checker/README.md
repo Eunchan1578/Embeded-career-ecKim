@@ -67,5 +67,7 @@ flowchart TD
 
 
 # 본 프로젝트에서는 HLD1을 진행
+# 프로젝트 완성 영상 : https://studio.youtube.com/video/t410JO3gH-A/edit
+
 
 
