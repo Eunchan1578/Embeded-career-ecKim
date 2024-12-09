@@ -1,0 +1,7 @@
+../Core/Src/gyro.c:19:9:MPU_begin	48	static
+../Core/Src/gyro.c:55:6:MPU_writeAccFullScaleRange	40	static
+../Core/Src/gyro.c:94:6:MPU_writeGyroFullScaleRange	40	static
+../Core/Src/gyro.c:132:6:MPU_readRawData	48	static
+../Core/Src/gyro.c:153:6:MPU_calibrateGyro	32	static
+../Core/Src/gyro.c:184:6:MPU_readProcessedData	16	static
+../Core/Src/gyro.c:207:6:MPU_calcAttitude	32	static
