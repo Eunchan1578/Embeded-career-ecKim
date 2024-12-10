@@ -1,5 +1,6 @@
 # This_STM_project is about Delivery Bag
-
+## Project Goal :
+# 본 프로젝트는 배달 가방에 담긴 음식에 따라 온도를 adaptive 하게 유지하고, 수평을 유지하는 배달 가방을 설계하는 것을 목표로 한다. 음식에 따른 적정 온도는 서버에 요청해 받아 유지를 한다.
 
 # Used Device :
 1. Nucleo f11re<br>
