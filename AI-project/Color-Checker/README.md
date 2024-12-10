@@ -32,7 +32,7 @@ gantt
 # Software Flow Chart
 
 ```mermaid
-flowchart TD
+flowchart Color Check
     A[Start: Chasing Car Activated] --> B[Depth Camera Input]
     B --> C[Person Detection]
     C --> D[Pose Estimation: Shoulders and Hips]
