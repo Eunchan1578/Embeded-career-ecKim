@@ -3,6 +3,9 @@
 ## Target Goal
 ### 본 프로젝트는 특정한 사람을 chaising 하는 cart bot을 color averaging & comparing 을 하여 설계하고자 한다.
 
+
+
+
 # HLD1 (젯슨나노에서 모델을 돌리기 어려운 경우)
 <img src="./HLD1.png" alt="이미지 설명" width="500" height="400"/>
 
