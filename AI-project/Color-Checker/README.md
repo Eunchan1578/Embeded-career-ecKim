@@ -32,7 +32,7 @@ gantt
 # Flow Chart_Color_Check
 
 ```mermaid
-<div class="mermaid" style="transform: scale(0.8); transform-origin: top left;">
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': 10 }, 'scale': 0.8 } }%%
 flowchart TD
     A[Start: Chasing Car Activated] --> B[Depth Camera Input]
     B --> C[Person Detection]
@@ -53,7 +53,6 @@ flowchart TD
     K -- Thumbs Up--> N[Move]
     K -- I Love You --> L[Reset]
     L --> C
-</div>
 ```
 
 
