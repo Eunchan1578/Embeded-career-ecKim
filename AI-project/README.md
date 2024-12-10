@@ -1,8 +1,9 @@
 # This_AI_project is about tracking person for smart cart & item carrier
+## 프로젝트 관련 자세한 설명은 Color-Checker에서~
 
-
-
-
+# 
+# 
+# 
 # challenges :
 # 1. Intel RealSense와 Raspberry Pi 호환성 문제
 Problem : Intel RealSense 카메라의 프레임을 가져오지 못함<br>
