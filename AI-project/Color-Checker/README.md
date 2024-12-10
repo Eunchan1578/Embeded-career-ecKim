@@ -29,10 +29,10 @@ gantt
     Rehearsal           :          rehearsal, 10/21, 2d
 ```
 
-# Software Flow Chart
+# Flow Chart_Color_Check
 
 ```mermaid
-Flowchart_Color_Check TD
+Flowchart TD
     A[Start: Chasing Car Activated] --> B[Depth Camera Input]
     B --> C[Person Detection]
     C --> D[Pose Estimation: Shoulders and Hips]
