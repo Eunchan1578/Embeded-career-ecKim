@@ -1,6 +1,12 @@
 # Intel-AI-project
-Gihub got openvino AI project(Human chasing mobility)
+target : human chasing cart
 
+
+# HLD1 (젯슨나노에서 모델을 돌리기 어려운 경우)
+<img src="./HLD1.png" alt="이미지 설명" width="500" height="400"/>
+
+# HLD2 (젯슨나노에서 모델을 돌릴 수 있을 경우)
+<img src="./HLD2.png" alt="이미지 설명" width="300" height="300"/>
 
 # Project Gantt Chart
 
@@ -54,19 +60,6 @@ flowchart TD
     L --> C
 ```
 
-
-
-# HLD1 (젯슨나노에서 모델을 돌리기 어려운 경우)
-<img src="./HLD1.png" alt="이미지 설명" width="500" height="400"/>
-
-# HLD2 (젯슨나노에서 모델을 돌릴 수 있을 경우)
-<img src="./HLD2.png" alt="이미지 설명" width="300" height="300"/>
-
-
-
-
-
-# 본 프로젝트에서는 HLD1을 진행
 # 프로젝트 완성 영상 : https://www.youtube.com/watch?v=t410JO3gH-A
 
 
