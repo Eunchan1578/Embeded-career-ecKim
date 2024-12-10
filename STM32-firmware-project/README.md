@@ -23,3 +23,7 @@
 6. I2C communication
 
 
+# 시연 영상 : 
+https://youtu.be/UJG904NljWI
+
+
