@@ -32,7 +32,6 @@ gantt
 # Flow Chart_Color_Check
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': 10 }, 'scale': 0.1 } }%%
 flowchart TD
     A[Start: Chasing Car Activated] --> B[Depth Camera Input]
     B --> C[Person Detection]
