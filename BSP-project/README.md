@@ -1,2 +1,1 @@
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Stars](https://img.shields.io/github/stars/username/repo)
+# 본 페이지는 ecKim의 BSP 관련 프로젝트를 위한 페이지이다.
