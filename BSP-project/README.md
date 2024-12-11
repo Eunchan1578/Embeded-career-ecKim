@@ -1,6 +1,1 @@
-# imbeded-career-ecKim
-# This page is for eckim to introduce his project
-
-
-# ecKim's name : eunchan Kim
-# ecKim's phone Num : 010-8789-5125
+# 본 페이지는 ecKim의 BSP 관련 프로젝트를 위한 페이지이다.
