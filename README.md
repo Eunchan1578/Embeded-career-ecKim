@@ -1,4 +1,4 @@
-# imbeded-career-ecKim
+# Embedded-career-ecKim
 ## This page is for eckim to introduce his project
 
 ## ecKim's name : eunchan Kim
