@@ -23,8 +23,6 @@ Solution : 동작을 분석하여 디버깅하여 해결<br>
 # 5. 코드를 병합하는 과정에서의 에러
 Problem : library 충돌이나 상대 코드를 이해하는 데에 있어서 어려움을 겪음<br>
 Solution : 대화와 refactoring을 통하여 해결<br>
-# 6. identify person을 모든 frame에서 유지하는 문제
-Problem : 여러가지 모델을 사용해보았지만 적합한 판단을 내는 모델이 없었음.<br>
-Solution : deepSORT 모델을 사용하여 객체의 특징을 추출하고 ID를 고정하기로 함.<br>
+
 
 
