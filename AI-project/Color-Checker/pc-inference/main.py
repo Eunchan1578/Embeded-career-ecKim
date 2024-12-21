@@ -9,7 +9,7 @@ from ultralytics.engine.results import Results
 import torch
 import time
 
-previous_timestamp_ms = 0
+
 global gesture_start_time_victory
 gesture_start_time_victory = None
 global gesture_start_time_thumbup
@@ -71,8 +71,11 @@ def send_data(sock, data):
     sock.sendall(data_size.to_bytes(4, byteorder='big'))  # 데이터 크기 전송
     sock.sendall(data_bytes)  # 데이터 전송
 
-model_path = 'gesture_recognizer.task'
 
+
+
+
+model_path = 'gesture_recognizer.task'
 #Hand land mark 설정
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(static_image_mode = False, max_num_hands = 1, min_detection_confidence = 0.5)
@@ -114,23 +117,15 @@ def draw_hand_landmarks(img,results):
             mp_drawing.draw_landmarks(img,handLms,mp_hands.HAND_CONNECTIONS)
                      
 def showHandGesture(recognizer,color_image):   
-    global previous_timestamp_ms
     # BGR 이미지를 RGB로 변환
     rgb_image = cv2.cvtColor(color_image, cv2.COLOR_BGR2RGB)
 
     # MediaPipe의 Image 형식으로 변환
     mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_image)
     frame_timestamp_ms = int(time.time() * 1000)
-    
-    if frame_timestamp_ms <= previous_timestamp_ms:
-        frame_timestamp_ms = previous_timestamp_ms + 1 #frame_timestanp_ms가 더 커야 하는데 더 작을 경우에 대한 예외 처리
-    
-    previous_timestamp_ms = frame_timestamp_ms
-
     #UI에 인식한 손의 landmark 표시
     results = hands.process(rgb_image)
     draw_hand_landmarks(color_image,results)
-    
     recognizer.recognize_async(mp_image, frame_timestamp_ms)
     cv2.putText(color_image, recognized_gesture, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
     
@@ -222,7 +217,6 @@ def track_thump_up():
             return True
     else:
         gesture_start_time_thumbup = None
-    
     return False
 
 def matching_degree_back(cropped_image):
@@ -281,8 +275,6 @@ def calculate_box(color_img, depth_img, results):
     global camera_in_flag
     if not results:
         return color_img, color_ROI, z_list, x_center_list
-    
-
     try:
         boxes = results[0].boxes.cpu().numpy()
         keypoints = results[0].keypoints.cpu().numpy()
@@ -294,15 +286,11 @@ def calculate_box(color_img, depth_img, results):
             
             if all(np.any(pt) for pt in [left_shoulder, right_shoulder, left_hip, right_hip]):
                 valid_points = [left_shoulder, right_shoulder, left_hip, right_hip]
-
                 x_min, y_min = np.min(valid_points, axis=0).astype(int)
                 x_max, y_max = np.max(valid_points, axis=0).astype(int)
-                
                 color_ROI.append((x_min, y_min, x_max, y_max))
-                
                 cv2.rectangle(color_img, (x_min, y_min), (x_max, y_max),
                             (0, 0, 255), 2)
-                
                 x_center = (x_max + x_min) // 2
                 x_center_list.append((x_center))
                 y_center = (y_max + y_min) // 2
@@ -318,14 +306,10 @@ def calculate_box(color_img, depth_img, results):
                 depth_label = f"depth : {z:.1f}"
                 cv2.putText(color_img, depth_label, (x_center - 50, y_center - 20),
                             cv2.FONT_HERSHEY_COMPLEX, 0.5, (0,255,0), 2)
-
                 x1, y1, x2, y2 = boxes[idx].xyxy[0].astype(int)
                 box_info.append(((x1, y1, x2, y2)))
-
                 label = f"person : {idx + 1}"
-                
                 cv2.rectangle(color_img, (x1,y1), (x2, y2), (0,255,0), 2, cv2.LINE_AA)
-                
                 cv2.putText(color_img, label, (x1, y1+10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 3, cv2.LINE_AA)
     except IndexError:
         print("No boxs in here")
@@ -346,15 +330,13 @@ def stand_by_mode(color_image, depth_image,recognizer):
     results = pose_model(source=color_image, conf=0.3, verbose=False)  
     color_image, box_info, color_ROI, x_center_list, z_list = calculate_box(color_image, depth_image, results) 
 
-  
-
     if len(color_ROI)==1:
         x1, y1, x2, y2 = box_info[0]
         x_ROI_1,y_ROI_1,x_ROI_2,y_ROI_2=color_ROI[0]
         cropped_image=color_image[y1:y2,x1:x2]
         cropped_image_ROI=color_image[y_ROI_1:y_ROI_2,x_ROI_1:x_ROI_2]
         showHandGesture(recognizer, cropped_image)
-        
+
         if track_victory_gesture() and back_flag==0:
             mean_front_rgb, mean_front_hsv = mean_color(cropped_image_ROI)
             Back_start_time=time.time() 
@@ -363,8 +345,7 @@ def stand_by_mode(color_image, depth_image,recognizer):
             print("뒤도세요")
             front_scan_flag=1
             #bell_ringing(앞 스캔 완료)
-        
-
+            
         if ((time.time()-Back_start_time)>GESTURE_HOLD_TIME) and back_flag==1:
             mean_back_rgb, mean_back_hsv= mean_color(cropped_image_ROI)
             # print(mean_back_rgb)
@@ -373,8 +354,8 @@ def stand_by_mode(color_image, depth_image,recognizer):
             back_flag=0
             bot_mode_flag=1
             back_scan_flag=1
-            #bell_ringing(뒤 스캔 완료, 주행을 시작합니다.)
-            
+            #bell_ringing(뒤 스캔 완료, 주행을 시작합니다.)          
+
     elif len(color_ROI)>1:
         #bell_ring(한명만 나와주세용)
         please_one_flag=1
@@ -386,7 +367,7 @@ def auto_mode(color_image, depth_image, recognizer):
     global mean_back_rgb, mean_back_hsv
     global bot_mode_flag
     success_flag_back=0
-    success_flag_front=0# 0: standby 1: front 2: back
+    success_flag_front=0
     global move_flag
     global move_pause_flag
     global dudu_flag
@@ -405,8 +386,6 @@ def auto_mode(color_image, depth_image, recognizer):
             success_flag_back=1
             ROI_back_human=box_info[idx_back]
             print("등 일치")
-            #bell_ring_dudu
-            # dudu_flag=1
             cropped_image_back_human=color_image[ROI_back_human[1]:ROI_back_human[3],ROI_back_human[0]:ROI_back_human[2]]
             break
         else: 
@@ -442,7 +421,6 @@ def auto_mode(color_image, depth_image, recognizer):
             move_flag = 0
         if track_thump_up(): #주행 시작
             print("주행 시작")
-            # move_flag=1
             #bell_ringing(주행을 시작합니다.)
             start_flag=1
             move_pause_flag=0
@@ -452,8 +430,6 @@ def auto_mode(color_image, depth_image, recognizer):
             pause_flag=1
             move_pause_flag=1
             #bell_ringing(일시 정지)
-
-
     if idx_back is None or idx_front is None:
         return 300,1.4
 
@@ -468,7 +444,6 @@ def main_program():
     move_pause_flag=0
     recognizer = handGestueInit()
     x_center, z = 0, 0
-
     global sound_num
     sound_num=0
     global camera_in_flag
@@ -480,22 +455,17 @@ def main_program():
     global start_flag
     global pause_flag
 
-    try:  # 종료 조건을 루프 내부로 이동
+    try: 
         while True:
             
             color_image, depth_image, depth_colormap = get_frame_from_data()
-            
-            
+
             if bot_mode_flag==0:
                 stand_by_mode(color_image, depth_image, recognizer)
-                
-            # person_dtection_flag=1
-
             if bot_mode_flag==1:
                 x_center , z = auto_mode(color_image, depth_image, recognizer)
                 
             f_height, f_width = color_image.shape[:2]
-            # center line using center position to set the position in center ratio
             f_width_center = f_width // 2
             f_width_ratio = f_width // 20
             f_center_min = f_width_center - f_width_ratio
@@ -523,14 +493,9 @@ def main_program():
             elif pause_flag==1:
                 sound_num=8
             send_data(client_socket,str(sound_num)) 
-
-            #print(move_flag)
             send_data(client_socket, str(move_flag))
-            
             send_data(client_socket,str(x_center))
-            
             send_data(client_socket,str(z))
-
 
             sound_num=0
             camera_in_flag=0
@@ -542,16 +507,12 @@ def main_program():
             start_flag=0
             pause_flag=0
 
-            
-
-            
             combined_image = np.hstack((color_image, depth_colormap))
             cv2.imshow('Color and depth combined image', combined_image)
             
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
     finally:
-        # 소켓 종료 및 자원 해제
         client_socket.close()
         cv2.destroyAllWindows()
     
