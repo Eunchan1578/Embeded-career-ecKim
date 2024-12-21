@@ -25,4 +25,9 @@ Problem : library 충돌이나 상대 코드를 이해하는 데에 있어서 �
 Solution : 대화와 refactoring을 통하여 해결<br>
 
 
+#
+#
+# 프로젝트에 대한 자세한 정보는 ppt에서 확인 가능
+
+
 
