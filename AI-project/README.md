@@ -27,7 +27,7 @@ Solution : 대화와 refactoring을 통하여 해결<br>
 
 #
 #
-# 프로젝트에 대한 자세한 정보는 본 디렉토리의 ppt에서 확인 가능
+# 프로젝트에 대한 자세한 정보는 본 디렉토리의 AI_Project.pptx에서 확인 가능
 
 
 
